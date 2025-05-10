@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envelope do Dia das Mães</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f9f2f4;
+            margin: 0;
+        }
+
+        .container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 200px auto 100px;
+        }
+
+        /* Envelope Styles */
+        .envelope {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #e77fa1;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 80px solid #d76a8b;
+            transform-origin: top;
+            transition: transform 0.4s ease;
+            z-index: 3;
+        }
+
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e77fa1;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .heart {
+            font-size: 50px;
+            color: white;
+        }
+
+        /* Letter Styles */
+        .letter {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: calc(100% - 20px);
+            height: calc(100% - 20px);
+            background-color: white;
+            border-radius: 3px;
+            z-index: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.5s ease, height 0.5s ease;
+            overflow: auto;
+            cursor: default;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Centralizar todo o texto na carta */
+        }
+
+        .envelope.open .letter {
+            transform: translateY(-220px);
+            opacity: 1;
+            height: 300px;
+            z-index: 4;
+        }
+
+        .letter-content {
+            opacity: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centralizar conteúdo verticalmente */
+            justify-content: center;
+            height: 100%;
+        }
+
+        .letter-title {
+            color: #d76a8b;
+            font-size: 22px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .letter-text {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            text-align: center; /* Garantir que o texto esteja centralizado */
+        }
+
+        .letter-signature {
+            color: #d76a8b;
+            font-style: italic;
+            font-size: 18px;
+            text-align: center; /* Alterado de right para center */
+            margin-top: 20px;
+        }
+
+        .instructions {
+            position: fixed;
+            bottom: 20px;
+            text-align: center;
+            color: #d76a8b;
+            font-size: 14px;
+            width: 100%;
+            left: 0;
+        }
+
+        /* Decorações */
+        .decoration {
+            position: absolute;
+            font-size: 20px;
+            color: #f9c6d4;
+            z-index: 1;
+        }
+        
+        .decoration:nth-child(1) { top: -30px; left: 20px; }
+        .decoration:nth-child(2) { top: -40px; right: 30px; }
+        .decoration:nth-child(3) { bottom: -20px; left: 40px; }
+        .decoration:nth-child(4) { bottom: -30px; right: 25px; }
+        
+        /* Efeito de sombra para dar profundidade */
+        .envelope::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 10px;
+            right: 10px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.1);
+            filter: blur(3px);
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="decoration">❀</span>
+        <span class="decoration">✿</span>
+        <span class="decoration">❀</span>
+        <span class="decoration">✿</span>
+        
+        <div class="envelope" id="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-content">
+                <div class="heart">❤️</div>
+            </div>
+            <div class="letter" id="letter">
+                <div class="letter-content">
+                    <h1 class="letter-title">Feliz Dia das Mães!</h1>
+                    <p class="letter-text">
+                        Querida Mamãe,<br>
+                        Hoje quero te agradecer por todo o amor e carinho que você sempre me deu. Você é meu exemplo, minha inspiração e meu porto seguro. Te amo muito!
+                    </p>
+                    <p class="letter-signature">Com todo meu amor, Aninha</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="instructions">Clique no envelope para abri-lo e ver a mensagem</div>
+
+    <script>
+        // Selecionar elementos
+        const envelope = document.getElementById('envelope');
+        
+        // Abrir envelope ao clicar
+        envelope.addEventListener('click', function() {
+            if (!this.classList.contains('open')) {
+                this.classList.add('open');
+            } else {
+                this.classList.remove('open');
+            }
+        });
+        
+        // Impedir que o clique na carta feche o envelope
+        document.getElementById('letter').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    </script>
+</body>
+</html>
