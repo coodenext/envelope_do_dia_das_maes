@@ -19,7 +19,7 @@
             position: relative;
             width: 300px;
             height: 200px;
-            margin: 200px auto 100px;
+            margin: 250px auto 150px; /* Aumentado para dar mais espaço */
         }
 
         /* Envelope Styles */
@@ -91,13 +91,13 @@
             overflow: auto;
             cursor: default;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            text-align: center; /* Centralizar todo o texto na carta */
+            text-align: center;
         }
 
         .envelope.open .letter {
-            transform: translateY(-220px);
+            transform: translateY(-250px); /* Aumentado para acomodar a foto maior */
             opacity: 1;
-            height: 300px;
+            height: 480px; /* Aumentado para acomodar a foto maior */
             z-index: 4;
         }
 
@@ -105,7 +105,7 @@
             opacity: 1;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centralizar conteúdo verticalmente */
+            align-items: center;
             justify-content: center;
             height: 100%;
         }
@@ -121,15 +121,32 @@
             color: #666;
             line-height: 1.5;
             margin-bottom: 15px;
-            text-align: center; /* Garantir que o texto esteja centralizado */
+            text-align: center;
         }
 
         .letter-signature {
             color: #d76a8b;
             font-style: italic;
             font-size: 18px;
-            text-align: center; /* Alterado de right para center */
-            margin-top: 20px;
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 15px; /* Espaço entre a assinatura e a foto */
+        }
+
+        .photo-container {
+            width: 220px; /* Aumentado de 150px para 220px */
+            height: 220px; /* Aumentado de 150px para 220px */
+            border-radius: 8px; /* Aumentado ligeiramente para combinar com o tamanho maior */
+            overflow: hidden;
+            margin: 0 auto;
+            border: 4px solid #f9c6d4; /* Aumentado de 3px para 4px */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .instructions {
@@ -169,13 +186,6 @@
             z-index: 0;
         }
     </style>
-    <!-- Miniatura para redes sociais e compartilhamento -->
-<meta property="og:title" content="Envelope do Dia das Mães 💖">
-<meta property="og:description" content="Surpreenda sua mãe com uma linda homenagem!">
-<meta property="og:image" content="https://coodenext.github.io/envelope_do_dia_das_maes/q.png">
-<meta property="og:url" content="https://coodenext.github.io/envelope_do_dia_das_maes/">
-<meta name="twitter:card" content="summary_large_image">
-
 </head>
 <body>
     <div class="container">
@@ -193,10 +203,14 @@
                 <div class="letter-content">
                     <h1 class="letter-title">Feliz Dia das Mães!</h1>
                     <p class="letter-text">
-                        Querida Mamãe,<br>
+                        Querida Mamãe,
                         Hoje quero te agradecer por todo o amor e carinho que você sempre me deu. Você é meu exemplo, minha inspiração e meu porto seguro. Te amo muito!
-                    </p>
-                    <p class="letter-signature">Com todo meu amor, Aninha</p>
+                    <p class="letter-signature">Com todo meu amor,<br>Aninha</p>
+                    
+                    <!-- Container da foto com borda decorativa -->
+                    <div class="photo-container">
+                        <img src="ima.jpg" alt="Foto da Aninha" class="photo">
+                    </div>
                 </div>
             </div>
         </div>
